@@ -1,5 +1,7 @@
 package FInal;
 
+import java.util.Scanner;
+
 public class Final {
 	
 	final public static Scanner sc = new Scanner(System.in);
@@ -10,10 +12,10 @@ public class Final {
 		col = askCol();
 		B1 = askB1();
 		B2 = askB2();
-		int board1[][]= generateBoard(row,column);
-		int board2[][]= generateBoard(row,column);
-		int visual1[][]= generateVisual(row,column);
-		int visual2[][]= generateVisual(row,column);
+		int board1[][]= generateBoard(row,col);
+		int board2[][]= generateBoard(row,col);
+		int visual1[][]= generateVisual(row,col);
+		int visual2[][]= generateVisual(row,col);
 		int numRows = board1.length;
 
 	}
@@ -46,7 +48,7 @@ public class Final {
 		int B2;
 		do{
 		System.out.println("Introduce the number of boats of length 2: ");
-		B2 = sc.nextInt();7
+		B2 = sc.nextInt();
 		}while(B2>=0);
 		return B2;
 	}
