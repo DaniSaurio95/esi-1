@@ -4,7 +4,11 @@ public class Final {
 
 	public static void main(String[] args) {
 		
-		
+		int row,col,B1,B2;
+		row = askRow();
+		col = askCol();
+		B1 = askB1();
+		B2 = askB2();
 		
 		int board1[][]= generateBoard(3,3);
 		int board2[][]= generateBoard(3,3);
@@ -13,6 +17,32 @@ public class Final {
 
 	}
 
+	
+	public static int askRow() {
+		int row;
+		System.out.println("Introduce the number of rows: ");
+		row = sc.nextInt();
+		return row;
+	}
+	public static int askCol() {
+		int col;
+		System.out.println("Introduce the number of columns: ");
+		col = sc.nextInt();
+		return col;
+	}
+	public static int askB1() {
+		int B1;
+		System.out.println("Introduce the number of boats of length 1: ");
+		B1 = sc.nextInt();
+		return B1;
+	}
+	public static int askB2() {
+		int B2;
+		System.out.println("Introduce the number of boats of length 2: ");
+		B2 = sc.nextInt();
+		return B2;
+	}
+	
 	
 	public static int[][]generateBoard(int a,int b){
 		int array1[][]=new int[a][b];
