@@ -28,20 +28,26 @@ public class Final {
 	}
 	public static int askCol() {
 		int col;
+		do{
 		System.out.println("Introduce the number of columns: ");
 		col = sc.nextInt();
+		}while(col>=3);
 		return col;
 	}
 	public static int askB1() {
 		int B1;
+		do{
 		System.out.println("Introduce the number of boats of length 1: ");
 		B1 = sc.nextInt();
+		}while(B1>=0);
 		return B1;
 	}
 	public static int askB2() {
 		int B2;
+		do{
 		System.out.println("Introduce the number of boats of length 2: ");
-		B2 = sc.nextInt();
+		B2 = sc.nextInt();7
+		}while(B2>=0);
 		return B2;
 	}
 	
