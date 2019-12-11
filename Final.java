@@ -20,8 +20,10 @@ public class Final {
 
 	public static int askRow() {
 		int row;
+		do{
 		System.out.println("Introduce the number of rows: ");
 		row = sc.nextInt();
+		}while(row>=3);
 		return row;
 	}
 	public static int askCol() {
