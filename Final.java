@@ -5,17 +5,15 @@ public class Final {
 	final public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
 		int row,col,B1,B2;
 		row = askRow();
 		col = askCol();
 		B1 = askB1();
 		B2 = askB2();
-		
-		int board1[][]= generateBoard(3,3);
-		int board2[][]= generateBoard(3,3);
-		int visual1[][]= generateVisual(3,3);
-		int visual2[][]= generateVisual(3,3);
+		int board1[][]= generateBoard(row,column);
+		int board2[][]= generateBoard(row,column);
+		int visual1[][]= generateVisual(row,column);
+		int visual2[][]= generateVisual(row,column);
 		int numRows = board1.length;
 
 	}
@@ -63,7 +61,6 @@ public class Final {
 	
 	
 	public static void main2(String[] args,int[][]visual1) {
-		
 		//do {
 			
 			System.out.println("Turn 1 payer 1");
