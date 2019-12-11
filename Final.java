@@ -53,11 +53,33 @@ public class Final {
 		return B2;
 	}
 	
-	public static int[][]generateBoard(int a,int b){
-		int array1[][]=new int[a][b];
+		public static int[][]generateBoard(int row,int col,int b1, int b2){
+		int a,b;
+		int array1[][]=new int[row][col];
+		for(int i=0;i<b1;i++) {
+			do {
+				System.out.println("Introduce the row you want your boat to be: [0,"+ row+"]");
+				a = sc.nextInt();
+				System.out.println("Introduce the column you want your boat to be: [0,"+ col+"]");
+				b = sc.nextInt();
+			}while(a<0 || a>row || b<0 || b>col);
 				
+			array1[a-1][b-1]=1;
+		}
+		//We print the board
+		for(int i=0;i<array1.length;i++) {
+			for(int j=0;j<array1[i].length;j++) {
+				if(array1[i][j]==1) {
+				System.out.print(1);
+				}else {
+					System.out.print("0");
+				}
+			}
+			System.out.println();
+		}
 		return array1;
 	}
+	
 	public static int[][]generateVisual(int a, int b) {
 		int array2[][]=new int[a][b];
 		for(int i=0; i<array2.length; i++) {
