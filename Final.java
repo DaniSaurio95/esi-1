@@ -53,32 +53,77 @@ public class Final {
 		return B2;
 	}
 	
-		public static int[][]generateBoard(int row,int col,int b1, int b2){
-		int a,b;
-		int array1[][]=new int[row][col];
-		for(int i=0;i<b1;i++) {
-			do {
-				System.out.println("Introduce the row you want your boat to be: [0,"+ row+"]");
-				a = sc.nextInt();
-				System.out.println("Introduce the column you want your boat to be: [0,"+ col+"]");
-				b = sc.nextInt();
-			}while(a<0 || a>row || b<0 || b>col);
-				
-			array1[a-1][b-1]=1;
-		}
-		//We print the board
-		for(int i=0;i<array1.length;i++) {
-			for(int j=0;j<array1[i].length;j++) {
-				if(array1[i][j]==1) {
-				System.out.print(1);
-				}else {
-					System.out.print("0");
-				}
-			}
-			System.out.println();
-		}
-		return array1;
+	public static int[][]generateBoard(int row,int col,int b1, int b2){
+		
+	//B1
+	int a,b;
+	int array1[][]=new int[row][col];
+	for(int i=0;i<b1;i++) {
+		do {
+			System.out.println("Introduce the row you want your B1 boat to be: [0,"+ row+"]");
+			a = sc.nextInt();
+			System.out.println("Introduce the column you want your B1 boat to be: [0,"+ col+"]");
+			b = sc.nextInt();
+		}while(a<0 || a>row || b<0 || b>col || (array1[a-2][b-1]==1) || (array1[a][b-1]==1) || (array1[a-1][b-2]==1) || (array1[a-1][b]==1) );	
+			
+		array1[a-1][b-1]=1;
 	}
+		
+	//B2
+	String direction, upOrDown, leftOrRight;
+	for(int i=0;i<b2;i++) {
+		do {
+		System.out.println("Introduce the row you want your B2 boat to be: [0,"+ row+"]");
+		a = sc.nextInt();
+		System.out.println("Introduce the column you want your B2 boat to be: [0,"+ col+"]");
+		b = sc.nextInt();
+		}while(a<0 || a>row || b<0 || b>col);
+		array1[a-1][b-1]=2;
+		do {
+		System.out.println("Do you want to place it vertically (v) or horizontaly (h)? ");
+		direction = sc.next();
+		}while(!direction.equalsIgnoreCase("v") && !direction.equalsIgnoreCase("h"));
+		
+		if(direction.equalsIgnoreCase("v")) {   //Vertical
+			do {
+			System.out.println("Do you want it upwards (u) or downwards (d)?");
+			upOrDown = sc.next();
+			}while(!upOrDown.equalsIgnoreCase("u") && !upOrDown.equalsIgnoreCase("d"));
+			if(upOrDown.equalsIgnoreCase("u")) {
+				array1[a-2][b-1]=2;
+			}else{
+				array1[a][b-1]=2;
+			}
+		}else { 			//Horizontal
+			do {
+				System.out.println("Do you want it rightwards (r) or leftwards (l)?");
+				leftOrRight = sc.next();
+				}while(!leftOrRight.equalsIgnoreCase("r") && !leftOrRight.equalsIgnoreCase("l"));
+				if(leftOrRight.equalsIgnoreCase("r")) {
+					array1[a-1][b]=2;
+				}else{
+					array1[a-1][b-2]=2;
+				}
+		}
+
+	}
+		
+		
+	//We print the board
+	for(int i=0;i<array1.length;i++) {
+		for(int j=0;j<array1[i].length;j++) {
+			if(array1[i][j]==1) {
+			System.out.print(1);
+			}else if (array1[i][j]==2)
+				System.out.print(2);
+			else {
+				System.out.print("0");
+			}
+		}
+		System.out.println();
+	}
+	return array1;
+}
 	
 	public static int[][]generateVisual(int a, int b) {
 		int array2[][]=new int[a][b];
