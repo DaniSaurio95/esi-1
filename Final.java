@@ -8,8 +8,8 @@ public class Final {
 
 	public static void main(String[] args) {
 		int row,col,B1,B2;
-		row = askRow();
-		col = askCol();
+		row = askDimension("rows");
+		col = askDimension("columns");
 		B1 = askB1();
 		B2 = askB2();
 		int board1[][]= generateBoard(row,col);
@@ -20,21 +20,13 @@ public class Final {
 
 	}
 
-	public static int askRow() {
-		int row;
+	public static int askDimension(String message) {
+		int dimension;
 		do{
-		System.out.println("Introduce the number of rows: ");
-		row = sc.nextInt();
-		}while(row>=3);
-		return row;
-	}
-	public static int askCol() {
-		int col;
-		do{
-		System.out.println("Introduce the number of columns: ");
-		col = sc.nextInt();
-		}while(col>=3);
-		return col;
+		System.out.println("Introduce the number of "+message+": ");
+		dimension = sc.nextInt();
+		}while(dimension>=3);
+		return dimension;
 	}
 	public static int askB1() {
 		int B1;
