@@ -325,22 +325,50 @@ public class Final {
 	}
 
 	public static int[][]matarDos(int[][]visual, int a, int b){
+		if(a!=0) {
+			visual=matarDosArriba(visual, a, b);
+		}
 		
+		if(a!=visual.length-1) {
+			visual=matarDosAbajo(visual, a, b);
+		}
+		if(b!=0) {
+			visual=matarDosIzquierda(visual, a, b);
+		}
+		if(b!=visual[a].length-1) {
+			visual=matarDosDerecha(visual, a, b);
+		}
+		return visual;
+	}
+	
+	public static int[][]matarDosArriba(int[][]visual, int a, int b){
 		if(visual[a-1][b]==7) {
 			visual [a-1][b]=6;
 			visual[a][b]=6;
 			System.out.println("Hundido");
 		}
+		return visual;
+	}
+	
+	public static int[][]matarDosAbajo(int[][]visual, int a, int b){
 		if(visual[a+1][b]==7) {
 			visual[a+1][b]=6;
 			visual[a][b]=6;
 			System.out.println("Hundido");
 		}
+		return visual;
+	}
+	
+	public static int[][]matarDosIzquierda(int[][]visual, int a, int b){
 		if(visual[a][b-1]==7) {
 			visual [a][b-1]=6;
 			visual[a][b]=6;
 			System.out.println("Hundido");
 		}
+		return visual;
+	}
+	
+	public static int[][]matarDosDerecha(int[][]visual, int a, int b){
 		if(visual[a][b+1]==7) {
 			visual [a][b+1]=6;
 			visual[a][b]=6;
