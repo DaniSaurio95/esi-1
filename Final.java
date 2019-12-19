@@ -451,4 +451,80 @@ public class Final {
 		}
 		return si;
 	}
+	
+	public static int[][] laterales(int[][]board, int a, int b) {
+		
+		onlyTop(board,a,b);
+		onlyBottom(board,a,b);
+		onlyLeft(board,a,b);
+		onlyRight(board,a,b);
+		topLeftCorner(board,a,b);
+		topRightCorner(board,a,b);
+		bottomLeftCorner(board,a,b);
+		bottomRightCorner(board,a,b);
+	
+		return board;
+	}
+	public static int[][]onlyLeft(int[][]board, int a, int b){
+		if(board[a][b]==1 && a!=0 && b==0 && a!=board[0].length) {
+			board[a+1][b]=6;
+			board[a-1][b]=6;
+			board[a][b+1]=6;
+		}
+		
+		return board;
+}
+	public static int[][]onlyBottom(int[][]board, int a, int b){
+		if(board[a][b]==1 && a==board[0].length && b!=0 && b!=board.length) {
+			board[a+1][b]=6;
+			board[a-1][b]=6;
+			board[a][b+1]=6;
+		}
+			return board;
+	}
+	public static int[][]onlyTop(int[][]board, int a, int b){
+		if(board[a][b]==1 && a==0 && b!=0 && b!=0) {
+			board[a+1][b]=6;
+			board[a-1][b]=6;
+			board[a][b+1]=6;
+			}
+		return board;
+	}
+	
+	
+	public static int[][]onlyRight(int[][]board, int a, int b){
+		if(board[a][b]==1 && a!=board[0].length && b==board.length  && a!=0) {
+			board[a+1][b]=6;
+			board[a-1][b]=6;
+			board[a][b+1]=6;
+			}
+		return board;
+}
+	public static int[][]topLeftCorner(int[][]board, int a, int b){
+		if(board[a][b]==1 && a==0 && b==0  && a!=board[0].length && b!=board.length) {
+			board[a+1][b]=6;
+			board[a][b+1]=6;
+			}
+		return board;
+}
+	public static int[][]topRightCorner(int[][]board, int a, int b){
+		if(board[a][b]==1 && a==0 && b==board.length  && a!=board[0].length && b!=0) {
+			board[a-1][b]=6;
+			board[a][b+1]=6;
+			}
+		return board;
+}
+	public static int[][]bottomLeftCorner(int[][]board, int a, int b){
+		if(board[a][b]==1 && a!=board[0].length && b==0  && a==0) {
+			board[a-1][b]=6;
+			board[a][b+1]=6;
+			}
+		return board;
+}
+	public static int[][]bottomRightCorner(int[][]board, int a, int b){
+		if(board[a][b]==1 && a!=board[0].length && b==board.length  && a!=0) {
+			board[a-1][b]=6;
+			board[a][b-1]=6;
+			}
+		return board;
 }
