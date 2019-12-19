@@ -277,7 +277,7 @@ public class Final {
 				if(board[coorX][coorY]==1) {
 				visual[coorX][coorY]=7;
 				}else if (board[coorX][coorY]==2) {
-					son2=sonDos(board,coorX,coorY);
+					son2=tocado(board,coorX,coorY);
 					if(son2=true) {
 						visual[coorX][coorY]=6;
 						matarDos(visual,coorX,coorY);
@@ -348,15 +348,107 @@ public class Final {
 		}
 		return visual;
 	}
-	public static boolean sonDos(int[][]board, int a, int b) {
-		boolean si=false;
-		if(board[a-1][b]==2 || board[a+1][b]==2 || board[a][b-1]==2 || board[a][b-1]==2) {
-			si=true;
-			if(si==true) {
-				System.out.println("Tocado");
-			}
+	
+	public static boolean tocado(int[][]board, int a, int b) {
+		boolean si=sonDos(board, a, b);
+		if(si) {
+			System.out.println("Tocado");
 		}
 		return si;
 	}
 	
+	public static boolean sonDos(int[][]board, int a, int b) {
+		boolean si=false;
+		if(a==0&&b==0) {
+			si=sonDosEsquinaSuperiorIzquierda(board, a, b);
+		}
+		if(a==board.length-1&&b==0) {
+			si=sonDosEsquinaInferiorIzquierda(board, a, b);
+		}
+		if(a==0&&b==board[a].length-1) {
+			si=sonDosEsquinaSuperiorDerecha(board, a, b);
+		}
+		if(a==board.length-1&&b==board[a].length-1) {
+			si=sonDosEsquinaInferiorDerecha(board, a, b);
+		}
+		if(a==0&&b!=0&&b!=board[a].length-1) {
+			si=sonDosFilaSuperior (board, a, b);
+		}
+		if(a==board.length-1&&b!=0&&b!=board[a].length-1) {
+			si=sonDosFilaInferior (board, a, b);
+		}
+		if(b==0&&a!=0&&a!=board.length-1) {
+			si=sonDosColumnaIzquierda (board, a, b);
+		}
+		if(b==board[a].length-1&&a!=0&&a!=board.length-1) {
+			si=sonDosColumnaDerecha (board, a, b);
+		}
+		if(a!=0&&a!=board.length-1&&b!=0&&b!=board[a].length-1) {
+			si=sonDosSinBorde (board, a, b);
+		}
+		return si;
+	}
+	public static boolean sonDosEsquinaSuperiorIzquierda(int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a+1][b]==2||board[a][b+1]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosEsquinaInferiorIzquierda(int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a-1][b]==2||board[a][b+1]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosEsquinaSuperiorDerecha(int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a+1][b]==2||board[a][b-1]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosEsquinaInferiorDerecha (int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a-1][b]==2||board[a][b-1]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosFilaSuperior (int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a+1][b]==2||board[a][b+1]==2||board[a][b-1]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosFilaInferior (int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a-1][b]==2||board[a][b+1]==2||board[a][b-1]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosColumnaIzquierda (int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a+1][b]==2||board[a][b+1]==2||board[a-1][b]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosColumnaDerecha (int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a+1][b]==2||board[a][b-1]==2||board[a-1][b]==2) {
+			si=true;
+		}
+		return si;
+	}
+	public static boolean sonDosSinBorde (int[][]board, int a, int b) {
+		boolean si=false;
+		if(board[a-1][b]==2 || board[a+1][b]==2 || board[a][b-1]==2 || board[a][b+1]==2) {
+			si=true;
+		}
+		return si;
+	}
 }
