@@ -64,6 +64,9 @@ public class Final {
 			else {
 			array1[a-1][b-1]=1;
 			}
+			
+			//We print the board
+			printBoard(array1);
 		}
 		
 		//B2
@@ -80,6 +83,9 @@ public class Final {
 				
 				array1[a-1][b-1]=2;
 				
+				//We print the board
+				printBoard(array1);
+				
 				do {
 				System.out.println("Do you want to place it vertically (v) or horizontaly (h)? ");
 				direction = sc.next();
@@ -87,8 +93,14 @@ public class Final {
 				if(direction.equalsIgnoreCase("v")) {   //Vertical
 					if(a==1) {
 						array1[a][b-1]=2;
+						
+						//We print the board
+						printBoard(array1);
 					}else if(a==row) {
 						array1[a-2][b-1]=2;
+						
+						//We print the board
+						printBoard(array1);
 					}else {
 						do {
 							System.out.println("Do you want it upwards (u) or downwards (d)?");
@@ -98,6 +110,9 @@ public class Final {
 							if((array1[a-2][b-2])==0 && (array1[a-2][b])==0) {
 								
 								array1[a-2][b-1]=2;
+								
+								//We print the board
+								printBoard(array1);
 							}
 							else {
 								System.out.println("You can't put a boat here. It is contigous to another one");
@@ -108,6 +123,9 @@ public class Final {
 							if((array1[a][b-2])==0 && (array1[a][b])==0 && (array1[a+1][b-1])==0 && (array1[a-2][b-1])==0) {
 								
 								array1[a][b-1]=2;
+								
+								//We print the board
+								printBoard(array1);
 							}
 							else {
 								System.out.println("You can't put a boat here. It is contigous to another one");
@@ -120,8 +138,14 @@ public class Final {
 				}else { 			//Horizontal
 					if(b==1) {
 						array1[a-1][b]=2;
+						
+						//We print the board
+						printBoard(array1);
 					}else if(b==col) {
 						array1[a-1][b-2]=2;
+						
+						//We print the board
+						printBoard(array1);
 					}else {
 					do {
 						System.out.println("Do you want it rightwards (r) or leftwards (l)?");
@@ -131,6 +155,9 @@ public class Final {
 							if((array1[a-2][b])==0 && (array1[a][b])==0 && (array1[a][b+1])==0) {
 								
 								array1[a-1][b]=2;
+								
+								//We print the board
+								printBoard(array1);
 							}
 							else {
 								System.out.println("You can't put a boat here. It is contigous to another one");
@@ -142,6 +169,9 @@ public class Final {
 							if((array1[a-2][b-2])==0 && (array1[a][b-2])==0 && (array1[a][b-3])==0) {
 								
 								array1[a-1][b-2]=2;
+								
+								//We print the board
+								printBoard(array1);
 							}
 							else {
 							System.out.println("You can't put a boat here. It is contigous to another one");
@@ -159,21 +189,25 @@ public class Final {
 		}
 		}
 		
-		//We print the board
+		return array1;
+	}
+
+	
+	
+	private static void printBoard(int[][] array1) {
 		for(int i=0;i<array1.length;i++) {
 			for(int j=0;j<array1[i].length;j++) {
 				if(array1[i][j]==1) {
-				System.out.print(1);
+				System.out.print("1");
 				}else if (array1[i][j]==2)
-					System.out.print(2);
+					System.out.print("2");
 				else {
 					System.out.print("0");
 				}
 			}
 			System.out.println();
 		}
-		return array1;
-	}
+	
 }
 	
 	
