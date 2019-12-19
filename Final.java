@@ -345,7 +345,7 @@ public class Final {
 		if(visual[a-1][b]==7) {
 			visual [a-1][b]=6;
 			visual[a][b]=6;
-			System.out.println("Hundido");
+			System.out.println("y hundido");
 		}
 		return visual;
 	}
@@ -354,7 +354,7 @@ public class Final {
 		if(visual[a+1][b]==7) {
 			visual[a+1][b]=6;
 			visual[a][b]=6;
-			System.out.println("Hundido");
+			System.out.println("y hundido");
 		}
 		return visual;
 	}
@@ -363,7 +363,7 @@ public class Final {
 		if(visual[a][b-1]==7) {
 			visual [a][b-1]=6;
 			visual[a][b]=6;
-			System.out.println("Hundido");
+			System.out.println("y hundido");
 		}
 		return visual;
 	}
@@ -372,20 +372,12 @@ public class Final {
 		if(visual[a][b+1]==7) {
 			visual [a][b+1]=6;
 			visual[a][b]=6;
-			System.out.println("Hundido");
+			System.out.println("y hundido");
 		}
 		return visual;
 	}
 	
 	public static boolean tocado(int[][]board, int a, int b) {
-		boolean si=sonDos(board, a, b);
-		if(si) {
-			System.out.println("Tocado");
-		}
-		return si;
-	}
-	
-	public static boolean sonDos(int[][]board, int a, int b) {
 		boolean si=false;
 		if(a==0&&b==0) {
 			si=sonDosEsquinaSuperiorIzquierda(board, a, b);
