@@ -8,6 +8,7 @@ public class Final {
 
 	public static void main(String[] args) {
 		int row,col,B1,B2;
+		boolean end = false;
 		row = askDimension("rows");
 		col = askDimension("columns");
 		B1 = askBoats("1");
@@ -19,11 +20,20 @@ public class Final {
 		
 		int visual1[][]=generateVisual(board1.length, board1[0].length);
 		int visual2[][]= visual1;
+		
 		printMatrix(visual1);
-		System.out.println("Turn for player 1, this is what you see");
-		printVisual(visual1);
-		visual1=attack(board1, visual1);
-		printVisual(visual1);
+		do {
+			System.out.println("Turn for player 1, this is what you see");
+			printVisual(visual2);
+			visual2=attack(board2, visual2);
+			end =isTheEnd(visual2,board2,1);
+			
+			System.out.println("Turn for player 2, this is what you see");
+			printVisual(visual1);
+			visual1=attack(board1,visual1);
+			end = isTheEnd(visual1,board1,2);
+				}while(end=false);
+		
 
 	}
 
@@ -547,4 +557,44 @@ public class Final {
 			board[a][b-1]=6;
 			}
 		return board;
+	}
+	public static boolean isTheEnd (int[][]visual, int[][]board, int player) {
+		boolean end=false;
+		int alive=aliveBoats(board);
+		int dead=deadBoats(visual);
+		if(alive==dead) {
+			end=true;
+			System.out.println("Player " + player+ "wins");
+		}
+		return end;
+	}
+	public static int aliveBoats(int[][]board) {
+		int alive=0;
+		for(int i=0; i==board.length; i++) {
+			for(int j=0; j==board[0].length; j++) {
+				if (board[i][j]==1) {
+					alive++;
+				}
+			}
+		}
+		for(int i=0; i==board.length; i++) {
+			for(int j=0; j==board[0].length; j++) {
+				if (board[i][j]==2) {
+					alive=alive+2;
+				}
+			}
+		}
+		return alive;
+	}
+	public static int deadBoats(int[][]visual) {
+		int dead =0;
+		for(int i=0; i==visual.length; i++) {
+			for(int j=0; j==visual[0].length; j++) {
+				if (visual[i][j]==7) {
+					dead++;
+				}
+			}
+		}
+		return dead;
+	}
 }
