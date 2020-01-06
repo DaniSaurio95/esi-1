@@ -7,7 +7,7 @@ public class Final {
 	final public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		int row,col,B1,B2;
+	int row,col,B1,B2;
 	boolean end = false;
 	row = askDimension("rows");
 	col = askDimension("columns");
@@ -210,8 +210,6 @@ public static int[][]generateBoard(int row,int col,int b1, int b2){
 	return array1;
 }
 
-
-
 private static void printBoard(int[][] array1) {
 	for(int i=0;i<array1.length;i++) {
 		for(int j=0;j<array1[i].length;j++) {
@@ -228,9 +226,6 @@ private static void printBoard(int[][] array1) {
 
 }
 
-
-
-
 public static int[][]generateVisual(int a, int b) {
 	int visual[][]=new int[a][b];
 	for(int i=0; i<visual.length; i++) {
@@ -243,7 +238,6 @@ public static int[][]generateVisual(int a, int b) {
 	return visual;
 }
 	
-
 public static void printVisual(int[][]visual) {
 	for(int i=0; i<visual.length; i++) {
 		for (int j=0; j<visual[i].length; j++) {
@@ -261,10 +255,7 @@ public static void printVisual(int[][]visual) {
 	}
 }
 
-
 public static int[][]attack(int[][]board,int[][]visual){
-	//int [][]array = new int[a][b];//las coordenadas del attack son a-1 y b-1 
-	boolean son2=false;
 	System.out.println("Select the coordenates for your attack");
 	int coorX;
 	int coorY;
@@ -273,20 +264,17 @@ public static int[][]attack(int[][]board,int[][]visual){
 	if(coorX>board.length-2 || coorY>board[0].length-2 || coorX<0 || coorY<0) {
 		System.out.println("Those coordenates are out of the map");
 	}
-	checkPhrase(board,visual, coorX,coorY);	
+	checkPhrase(board,visual,coorY,coorX);	
 		
-	
+	if(board[coorY][coorX]==1) {
+		visual[coorY][coorX]=7;
+	}else if(board[coorY][coorX]==2) {
+		visual[coorY][coorX]=6;
+		visual=killTwo(visual,coorY,coorX);
+	}else if (board[coorY][coorX]==0) {
+		visual[coorY][coorX]=8;
+	}
 
-	if(board[coorX][coorY]==1) {
-		visual[coorX][coorY]=7;
-	}else if(board[coorX][coorY]==2) {
-			visual[coorX][coorY]=6;
-					visual=killTwo(visual,coorX,coorY);
-			}else if (board[coorX][coorY]==0) {
-				visual[coorX][coorY]=8;
-			}
-
-	
 	return visual;
 }
 
@@ -376,69 +364,6 @@ public static int[][]matarDosDerecha(int[][]visual, int a, int b){
 	return visual;
 }
 
-public static int[][]onlyLeft(int[][]board, int a, int b){
-	if(board[a][b]==1 && a!=0 && b==0 && a!=board[0].length) {
-		board[a+1][b]=6;
-		board[a-1][b]=6;
-		board[a][b+1]=6;
-	}
-	
-	return board;
-}
-public static int[][]onlyBottom(int[][]board, int a, int b){
-	if(board[a][b]==1 && a==board[0].length && b!=0 && b!=board.length) {
-		board[a+1][b]=6;
-		board[a-1][b]=6;
-		board[a][b+1]=6;
-	}
-		return board;
-}
-public static int[][]onlyTop(int[][]board, int a, int b){
-	if(board[a][b]==1 && a==0 && b!=0 && b!=0) {
-		board[a+1][b]=6;
-		board[a-1][b]=6;
-		board[a][b+1]=6;
-		}
-	return board;
-}
-
-
-public static int[][]onlyRight(int[][]board, int a, int b){
-	if(board[a][b]==1 && a!=board[0].length && b==board.length  && a!=0) {
-		board[a+1][b]=6;
-		board[a-1][b]=6;
-		board[a][b+1]=6;
-		}
-	return board;
-}
-public static int[][]topLeftCorner(int[][]board, int a, int b){
-	if(board[a][b]==1 && a==0 && b==0  && a!=board[0].length && b!=board.length) {
-		board[a+1][b]=6;
-		board[a][b+1]=6;
-		}
-	return board;
-}
-public static int[][]topRightCorner(int[][]board, int a, int b){
-	if(board[a][b]==1 && a==0 && b==board.length  && a!=board[0].length && b!=0) {
-		board[a-1][b]=6;
-		board[a][b+1]=6;
-		}
-	return board;
-}
-public static int[][]bottomLeftCorner(int[][]board, int a, int b){
-	if(board[a][b]==1 && a!=board[0].length && b==0  && a==0) {
-		board[a-1][b]=6;
-		board[a][b+1]=6;
-		}
-	return board;
-}
-public static int[][]bottomRightCorner(int[][]board, int a, int b){
-	if(board[a][b]==1 && a!=board[0].length && b==board.length  && a!=0) {
-		board[a-1][b]=6;
-		board[a][b-1]=6;
-		}
-	return board;
-}
 public static boolean isTheEnd (int[][]visual, int player, int B1, int B2) {
 	boolean end=false;
 	int alive=B1+(2*B2);
@@ -449,7 +374,6 @@ public static boolean isTheEnd (int[][]visual, int player, int B1, int B2) {
 	}
 	return end;
 }
-
 
 public static int deadBoats(int[][]visual) {
 	int dead =0;
