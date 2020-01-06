@@ -20,9 +20,7 @@ public class Final {
 	
 	int visual1[][]=generateVisual(board1.length, board1[0].length);
 	int visual2[][]=generateVisual(board2.length, board2[0].length);
-	
-	//printMatrix(visual1);
-	
+
 	do {
 		System.out.println("Turn for player 1, this is what you see");
 		printVisual(visual2);
@@ -40,9 +38,6 @@ public class Final {
 			end=true;
 		}
 	}while(end==false);
-
-	
-
 }
 
 public static int askDimension(String message) {
@@ -62,7 +57,6 @@ public static int askBoats(String number) {
 	return boat;
 }
 
-	
 public static int[][]generateBoard(int row,int col,int b1, int b2){
 	
 	//B1
@@ -313,22 +307,21 @@ public static int askCoor(int[][]board,String message) {
 
 public static int[][]killTwo(int[][]visual, int a, int b){
 	if(a!=0) {
-		visual=matarDosArriba(visual, a, b);
+		visual=killTwoUp(visual, a, b);
 	}
-	
 	if(a!=visual.length-1) {
-		visual=matarDosAbajo(visual, a, b);
+		visual=killTwoDown(visual, a, b);
 	}
 	if(b!=0) {
-		visual=matarDosIzquierda(visual, a, b);
+		visual=killTwoLeft(visual, a, b);
 	}
 	if(b!=visual[a].length-1) {
-		visual=matarDosDerecha(visual, a, b);
+		visual=killTwoRight(visual, a, b);
 	}
 	return visual;
 }
 
-public static int[][]matarDosArriba(int[][]visual, int a, int b){
+public static int[][]killTwoUp(int[][]visual, int a, int b){
 	if(visual[a-1][b]==6) {
 		visual[a-1][b]=7;
 		visual[a][b]=7;
@@ -337,7 +330,7 @@ public static int[][]matarDosArriba(int[][]visual, int a, int b){
 	return visual;
 }
 
-public static int[][]matarDosAbajo(int[][]visual, int a, int b){
+public static int[][]killTwoDown(int[][]visual, int a, int b){
 	if(visual[a+1][b]==6) {
 		visual[a+1][b]=7;
 		visual[a][b]=7;
@@ -346,7 +339,7 @@ public static int[][]matarDosAbajo(int[][]visual, int a, int b){
 	return visual;
 }
 
-public static int[][]matarDosIzquierda(int[][]visual, int a, int b){
+public static int[][]killTwoLeft(int[][]visual, int a, int b){
 	if(visual[a][b-1]==6) {
 		visual [a][b-1]=7;
 		visual[a][b]=7;
@@ -355,7 +348,7 @@ public static int[][]matarDosIzquierda(int[][]visual, int a, int b){
 	return visual;
 }
 
-public static int[][]matarDosDerecha(int[][]visual, int a, int b){
+public static int[][]killTwoRight(int[][]visual, int a, int b){
 	if(visual[a][b+1]==6) {
 		visual [a][b+1]=7;
 		visual[a][b]=7;
