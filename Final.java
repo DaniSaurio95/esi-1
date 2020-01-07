@@ -1,12 +1,10 @@
-package FInal;
-
+package Work;
 import java.util.Scanner;
 
 public class Final {
+public static Scanner sc = new Scanner(System.in);
 	
-	final public static Scanner sc = new Scanner(System.in);
-
-	public static void main(String[] args) {
+public static void main(String[] args) {
 	int row,col,B1,B2;
 	boolean end = false;
 	row = askDimension("rows");
@@ -61,159 +59,271 @@ public static int[][]generateBoard(int row,int col,int b1, int b2){
 	
 	//B1
 	int a,b;
-	int array1[][]=new int[row][col];
+	int array[][]=new int[row][col];
+	int lastRow=row-1;
+	int lastCol=col-1;
+	int typeOfBoat=1;
 	for(int i=0;i<b1;i++) {
 		do {
-			System.out.println("Introduce the row you want your B1 boat to be: [0,"+ row+"]");
+			System.out.println("Introduce the row you want your B1 boat to be: [1,"+ row+"]");
 			a = sc.nextInt();
-			System.out.println("Introduce the column you want your B1 boat to be: [0,"+ col+"]");
+			System.out.println("Introduce the column you want your B1 boat to be: [1,"+ col+"]");
 			b = sc.nextInt();
-		}while(a<0 || a>row || b<0 || b>col);
-		if((array1[a-1][b-2])==1 || (array1[a-1][b])==1 || (array1[a-2][b-1])==1 || (array1[a][b-1])==1) {
-			System.out.println("You can't put a boat here. It is contigous to another one");
+		}while(a<1 || a>row || b<1 || b>col);
+		a=a-1;
+		b=b-1;
+		
+		if(a==0 && b==0)
+			array=checkTopLeft(array, a, b, i, typeOfBoat);
+		
+		if(a==lastRow && b==0)
+			array=checkBottomLeft(array, a, b, i, typeOfBoat);
+		
+		if(a==0 && b==lastCol)
+			array=checkTopRight(array, a, b, i, typeOfBoat);
+		
+		if(a==lastRow && b==lastCol)
+			array=checkBottomRight(array, a, b, i, typeOfBoat);
+		
+		if(a==0 && b>0 && b<lastCol)
+			array=checkFirstRow(array, a, b, i, typeOfBoat);
+		
+		if(a==lastRow && b>0 && b<lastCol)
+			array=checkLastRow(array, a, b, i, typeOfBoat);
+		
+		if(b==0 && a>0 && a<lastRow)
+			array=checkFirstCol(array, a, b, i, typeOfBoat);
+		
+		if(b==lastCol && a>0 && a<lastRow)
+			array=checkLastCol(array, a, b, i, typeOfBoat);
+		
+		if(a>0 && a<lastRow && b>0 && b<lastCol)
+			array=checkInside(array, a, b, i, typeOfBoat);
+		
+		if(array[a][b]==0)
 			i--;
-		}
-		else {
-		array1[a-1][b-1]=1;
-		}
 		
 		//We print the board
-		printBoard(array1);
+		printBoard(array);
 	}
 	
 	//B2
-	String direction, upOrDown, leftOrRight;
-	for(int i=0;i<b2;i++) {
-		do {
-		System.out.println("Introduce the row you want your B2 boat to be: [0,"+ row+"]");
-		a = sc.nextInt();
-		System.out.println("Introduce the column you want your B2 boat to be: [0,"+ col+"]");
-		b = sc.nextInt();
-		}while(a<0 || a>row || b<0 || b>col);
-		
-		if((array1[a-1][b-2])==0 && (array1[a-1][b])==0 && (array1[a-2][b-1])==0 && (array1[a][b-1])==0) {
+	typeOfBoat=2;
+		for(int i=0;i<b2;i++) {
+			do {
+				System.out.println("Introduce the row you want your B2 boat to be: [1,"+ row+"]");
+				a = sc.nextInt();
+				System.out.println("Introduce the column you want your B2 boat to be: [1,"+ col+"]");
+				b = sc.nextInt();
+			}while(a<1 || a>row || b<1 || b>col);
+			a=a-1;
+			b=b-1;
+			if(a==0 && b==0) {
+				array=checkTopLeft(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			if(a==lastRow && b==0) {
+				array=checkBottomLeft(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
 			
-			array1[a-1][b-1]=2;
+			if(a==0 && b==lastCol) {
+				array=checkTopRight(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			
+			if(a==lastRow && b==lastCol) {
+				array=checkBottomRight(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			
+			if(a==0 && b>0 && b<lastCol) {
+				array=checkFirstRow(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			
+			if(a==lastRow && b>0 && b<lastCol) {
+				array=checkLastRow(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			
+			if(b==0 && a>0 && a<lastRow) {
+				array=checkFirstCol(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			
+			if(b==lastCol && a>0 && a<lastRow) {
+				array=checkLastCol(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
+			
+			if(a>0 && a<lastRow && b>0 && b<lastCol) {
+				array=checkInside(array, a, b, i, typeOfBoat);
+				if(array[a][b]==0)
+					i--;
+				else {
+					printBoard(array);
+					array=askForOtherPart(array, a, b, i);
+				}
+			}
 			
 			//We print the board
-			printBoard(array1);
-			
-			do {
-			System.out.println("Do you want to place it vertically (v) or horizontaly (h)? ");
-			direction = sc.next();
-			}while(!direction.equalsIgnoreCase("v") && !direction.equalsIgnoreCase("h"));
-			if(direction.equalsIgnoreCase("v")) {   //Vertical
-				if(a==1) {
-					array1[a][b-1]=2;
-					
-					//We print the board
-					printBoard(array1);
-				}else if(a==row) {
-					array1[a-2][b-1]=2;
-					
-					//We print the board
-					printBoard(array1);
-				}else {
-					do {
-						System.out.println("Do you want it upwards (u) or downwards (d)?");
-						upOrDown = sc.next();
-					}while(!upOrDown.equalsIgnoreCase("u") && !upOrDown.equalsIgnoreCase("d"));
-					if(upOrDown.equalsIgnoreCase("u")) {
-						if((array1[a-2][b-2])==0 && (array1[a-2][b])==0) {
-							
-							array1[a-2][b-1]=2;
-							
-							//We print the board
-							printBoard(array1);
-						}
-						else {
-							System.out.println("You can't put a boat here. It is contigous to another one");
-							i--;
-							array1[a-1][b-1]=0;
-						}
-					}else{
-						if((array1[a][b-2])==0 && (array1[a][b])==0 && (array1[a+1][b-1])==0 && (array1[a-2][b-1])==0) {
-							
-							array1[a][b-1]=2;
-							
-							//We print the board
-							printBoard(array1);
-						}
-						else {
-							System.out.println("You can't put a boat here. It is contigous to another one");
-							i--;
-							array1[a-1][b-1]=0;
-						}
+			printBoard(array);
+				
 
-					}
-				}
-			}else { 			//Horizontal
-				if(b==1) {
-					array1[a-1][b]=2;
-					
-					//We print the board
-					printBoard(array1);
-				}else if(b==col) {
-					array1[a-1][b-2]=2;
-					
-					//We print the board
-					printBoard(array1);
-				}else {
-				do {
-					System.out.println("Do you want it leftwards (l) or rightwards (r)?");
-					leftOrRight = sc.next();
-					}while(!leftOrRight.equalsIgnoreCase("r") && !leftOrRight.equalsIgnoreCase("l"));
-					if(leftOrRight.equalsIgnoreCase("r")) {
-						if((array1[a-2][b])==0 && (array1[a][b])==0 && (array1[a][b+1])==0) {
-							
-							array1[a-1][b]=2;
-							
-							//We print the board
-							printBoard(array1);
-						}
-						else {
-							System.out.println("You can't put a boat here. It is contigous to another one");
-							i--;
-							array1[a-1][b-1]=0;
-						}
-
-					}else{
-						if((array1[a-2][b-2])==0 && (array1[a][b-2])==0 && (array1[a][b-3])==0) {
-							
-							array1[a-1][b-2]=2;
-							
-							//We print the board
-							printBoard(array1);
-						}
-						else {
-						System.out.println("You can't put a boat here. It is contigous to another one");
-						i--;
-						array1[a-1][b-1]=0;
-						}
-
-					}
-				}
-			}
 		}
-		else {
-			System.out.println("You can't put a boat here. It is contigous to another one");
-			i--;
-	}
-	}
 	
-	return array1;
+	return array;
 }
 
-private static void printBoard(int[][] array1) {
-	for(int i=0;i<array1.length;i++) {
-		for(int j=0;j<array1[i].length;j++) {
-			if(array1[i][j]==1) {
-			System.out.print("1");
-			}else if (array1[i][j]==2)
-				System.out.print("2");
-			else {
-				System.out.print("0");
-			}
+private static int[][] askForOtherPart(int[][] array, int a, int b, int i) {
+	int row2,col2;
+	a=a+1;
+	b=b+1;
+	do {
+		System.out.println("Introduce the row of the other part of the boat");
+		row2=sc.nextInt();
+		System.out.println("Introduce the column of the other part of the boat");
+		col2=sc.nextInt();
+	}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)));
+	array[row2-1][col2-1]=2;
+	return array;
+}
+
+private static int[][] checkInside(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b-1])>0 || (array[a][b+1])>0 || (array[a-1][b])>0 || (array[a+1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkLastCol(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a-1][b])>0 || (array[a+1][b])>0 || (array[a][b-1])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkFirstCol(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a-1][b])>0 || (array[a+1][b])>0 || (array[a][b+1])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkLastRow(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b-1])>0 || (array[a][b+1])>0 || (array[a+1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkFirstRow(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b-1])>0 || (array[a][b+1])>0 || (array[a+1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkBottomRight(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b-1])>0 || (array[a-1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkTopRight(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b-1])>0 || (array[a+1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkBottomLeft(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b+1])>0 || (array[a-1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static int[][] checkTopLeft(int[][] array, int a, int b, int i, int typeOfBoat) {
+	if((array[a][b+1])>0 || (array[a+1][b])>0) {
+		System.out.println("You can't put a boat here. It is contigous to another one");
+	}
+	else {
+		array[a][b]=typeOfBoat;
+	}
+	return array;
+}
+
+private static void printBoard(int[][] array) {
+	for(int i=0;i<array.length;i++) {
+		for(int j=0;j<array[i].length;j++) {
+			System.out.print(array[i][j]+" ");
 		}
 		System.out.println();
 	}
