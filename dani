@@ -99,9 +99,9 @@ public static int[][]generateBoard(int row,int col,int b1, int b2){
 			do {
 				System.out.println("Introduce the row of the other part of the boat");
 				row2=sc.nextInt();
-				System.out.println("Introduce the row of the other part of the boat");
+				System.out.println("Introduce the column of the other part of the boat");
 				col2=sc.nextInt();
-			}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)));
+			}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) && (row2==a && col2==b));
 			array1[row2-1][col2-1]=2;
 			//We print the board
 			printBoard(array1);
