@@ -97,8 +97,9 @@ public static int[][]generateBoard(int row,int col,int b1, int b2){
 				printBoard(array1);
 				
 			do {
-				System.out.println("Introduce the coordenate of the other part of the boat");
+				System.out.println("Introduce the row of the other part of the boat");
 				row2=sc.nextInt();
+				System.out.println("Introduce the row of the other part of the boat");
 				col2=sc.nextInt();
 			}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)));
 			array1[row2-1][col2-1]=2;
