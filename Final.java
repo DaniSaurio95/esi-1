@@ -261,7 +261,7 @@ private static int[][] checkFirstCol(int[][] array, int a, int b, int i, int typ
 }
 
 private static int[][] checkLastRow(int[][] array, int a, int b, int i, int typeOfBoat) {
-	if((array[a][b-1])>0 || (array[a][b+1])>0 || (array[a+1][b])>0) {
+	if((array[a][b-1])>0 || (array[a][b+1])>0 || (array[a-1][b])>0) {
 		System.out.println("You can't put a boat here. It is contigous to another one");
 	}
 	else {
