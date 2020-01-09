@@ -1,8 +1,8 @@
 Hola soy Alvaro puedo editar
 Yo tambien ekisde
 BEGIN main
-	row <- askDimension("rows"):integer
-	col <- askDimension("columns"):integer
+	row <- askDimension("rows")
+	col <- askDimension("columns")
 	isEnd <- false
 	B1 <- askBoats("1")
 	B2 <- askBoats("2")
