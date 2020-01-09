@@ -5,19 +5,19 @@ public class Final {
 final public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		int row,col,B1,B2;
-		boolean end = false;
-		row = askDimension("rows");
+		int row,col,B1,B2;	//We declare the main variables to run the game
+		boolean end = false;	//This boolean variable will determine when the game is over
+		row = askDimension("rows");	//We ask the user for the rows and columns of the game table
 		col = askDimension("columns");
-		B1 = askBoats("1");
+		B1 = askBoats("1");	//We as the user for the number of boats of size 1 and size 2 
 		B2 = askBoats("2");
-		System.out.println("Player 1");
+		System.out.println("Player 1");		//The game starts asking both players where they want their boats placed
 		int board1[][]= generateBoard(row,col,B1,B2);
 		System.out.println("Player 2");
 		int board2[][]= generateBoard(row,col,B1,B2);
 		
-		int visual1[][]=generateVisual(board1.length, board1[0].length);
-		int visual2[][]=generateVisual(board2.length, board2[0].length);
+		int visual1[][]=generateVisual(board1.length, board1[0].length);	//Now we generate the boards that both players 
+		int visual2[][]=generateVisual(board2.length, board2[0].length);	//will see in order to play.
 
 		do {
 			System.out.println("Turn for player 1, this is what you see");
