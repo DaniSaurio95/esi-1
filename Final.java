@@ -6,7 +6,7 @@ final public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		int row,col,B1,B2;
-		boolean end = false;
+		boolean isEnd = false;
 		row = askDimension("rows");
 		col = askDimension("columns");
 		B1 = askBoats("1");
@@ -19,27 +19,27 @@ final public static Scanner sc = new Scanner(System.in);
 		int visual1[][]=generateVisual(board1.length, board1[0].length);
 		int visual2[][]=generateVisual(board2.length, board2[0].length);
 
-		mainLoop(visual1, visual2, board1, board2, end, B1, B2);
+		mainLoop(visual1, visual2, board1, board2, isEnd, B1, B2);
 	}
 
-	public static void mainLoop(int[][]visual1, int[][] visual2, int[][]board1, int[][] board2, boolean end, int B1, int B2) {
+	public static void mainLoop(int[][]visual1, int[][] visual2, int[][]board1, int[][] board2, boolean isEnd, int B1, int B2) {
 		do {
 			System.out.println("Turn for player 1, this is what you see");
 			printVisual(visual2);
 			visual2=attack(board2, visual2);
 			printVisual(visual2);
-			end =isTheEnd(visual2,1,B1,B2);
+			isEnd =isTheEnd(visual2,1,B1,B2);
 			
-			if(end==false) {
+			if(isEnd==false) {
 			System.out.println("Turn for player 2, this is what you see");
 			printVisual(visual1);
 			visual1=attack(board1,visual1);
 			printVisual(visual1);
-			end = isTheEnd(visual1,2,B1,B2);
+			isEnd = isTheEnd(visual1,2,B1,B2);
 			}else {
-				end=true;
+				isEnd=true;
 			}
-		}while(end==false);
+		}while(isEnd==false);
 	}
 	
 	public static int askDimension(String message) {
@@ -478,14 +478,14 @@ final public static Scanner sc = new Scanner(System.in);
 	}
 
 	public static boolean isTheEnd (int[][]visual, int player, int B1, int B2) {
-		boolean end=false;
+		boolean isEnd=false;
 		int alive=B1+(2*B2);
 		int dead=deadBoats(visual);
 		if(alive==dead) {
-			end=true;
+			isEnd=true;
 			System.out.println("Player " + player+ " wins");
 		}
-		return end;
+		return isEnd;
 	}
 
 	public static int deadBoats(int[][]visual) {
