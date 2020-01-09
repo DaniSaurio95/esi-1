@@ -3,26 +3,26 @@ Yo tambien ekisde
 BEGIN main
 	row <- askDimension("rows"):integer
 	col <- askDimension("columns"):integer
-	end <- false:boolean
+	isEnd <- false
 	B1 <- askBoats("1")
 	B2 <- askBoats("2")
 
 	WRITE ("Player 1")
-	board1[][] <- generateBoard(row,col,B1,B2):integer
+	board1[][] <- generateBoard(row,col,B1,B2)
 
 	WRITE ("Player 2")
-	int board2[][] <- generateBoard(row,col,B1,B2):integer
+	int board2[][] <- generateBoard(row,col,B1,B2)
 
 	int visual1[][] <- generateVisual(length(board1),length(board2))
 	int visual2[][] <- generateVisual(length(board1),length(board2))
 	
-	mainloop(visual1, visual2, baord1, board2, end, B1, B2)
+	mainloop(visual1, visual2, baord1, board2, isEnd, B1, B2)
 END main
 
 
 BEGIN askDimension(message)
 	DO
-		WRITE ("Introduce the number of "+message+": ")
+		WRITE ("Introduce the number of " message ": ")
 		READ dimension
 	WHILE(dimension < 3)
 	RETURN dimension
@@ -31,7 +31,7 @@ END askDimension
 
 BEGIN askBoats(number)
 	DO
-		WRITE ("Introduce the number of boats of length "+number+": ")
+		WRITE ("Introduce the number of boats of length " number ": ")
 		READ boat
 	WHILE(boat<0)
 	RETURN boat
@@ -39,14 +39,14 @@ END askBoats
 
 BEGIN mainLoop (visual1, visual2, board1, board2, isEnd, B1, B2)
 	DO
-		Write Turn for player 1, this is what you see
+		WRITE ("Turn for player 1, this is what you see")
 		printVisual(visual2)
 		visual2 <- attack(board2, visual2)
 		printVisual(visual2)
 		isEnd <- isTheEnd(visual2, 1, B1, B2)
 	
 		IF(isEnd==false) THEN
-			Write Turn for player 2, this is what you see
+			WRITE("Turn for player 2, this is what you see")
 			printVisual(visual1)
 			visual2 <- attack(board1, visual1)
 			printVisual(visual1)
