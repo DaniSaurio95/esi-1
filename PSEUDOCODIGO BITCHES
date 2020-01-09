@@ -61,7 +61,7 @@ attack(board, visual)
 Write (""Select the coordenates for your attack")
 coorx <- askCoor(board,"X")-1
 coorY <- askCoor(board,"Y")-1
-IF(coorX>length(board)-2 or coorY>length(board[0])-2 or coorX<0 or coorY<0) THEN Write ("Those coordenatea re out of the map")
+IF(coorX>length(board)-2 OR coorY>length(board[0])-2 OR coorX<0 or coorY<0) THEN Write ("Those coordenatea re out of the map")
 END_IF
 
 checkPhrase(board,visual,coorY,coorX)
@@ -105,13 +105,13 @@ END_AskCoor
 
 killTwo(visual, a, b)
 BEGIN_KillTwo
-IF(a!=0) THEN visual<- killTwoUp(visual,a,b)
+IF(a<>0) THEN visual<- killTwoUp(visual,a,b)
 END_IF
-IF(a!=length(visual)-1) THEN visual<-killTwoDown(visual, a, b)
+IF(a<>length(visual)-1) THEN visual<-killTwoDown(visual, a, b)
 END_IF
-IF(b!=0) THEN visual<-killTwoLeft(visual, a, b)
+IF(b<>0) THEN visual<-killTwoLeft(visual, a, b)
 END_IF
-IF(b!=length(visual[a])-1) THEN visual<-killTwoRight(visual, a, b)
+IF(b<>length(visual[a])-1) THEN visual<-killTwoRight(visual, a, b)
 return visual 
 
 END_KillTwo
