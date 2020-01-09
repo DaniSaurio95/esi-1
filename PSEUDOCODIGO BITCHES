@@ -16,7 +16,7 @@ BEGIN main
 	int visual1[][] <- generateVisual(length(board1),length(board2))
 	int visual2[][] <- generateVisual(length(board1),length(board2))
 	
-	mainloop(visual1, visual2, baord1, board2, isEnd, B1, B2)
+	mainLoop(visual1, visual2, baord1, board2, isEnd, B1, B2)
 END main
 
 
@@ -45,7 +45,7 @@ BEGIN mainLoop (visual1, visual2, board1, board2, isEnd, B1, B2)
 		printVisual(visual2)
 		isEnd <- isTheEnd(visual2, 1, B1, B2)
 	
-		IF(isEnd==false) THEN
+		IF(isEnd = false) THEN
 			WRITE("Turn for player 2, this is what you see")
 			printVisual(visual1)
 			visual2 <- attack(board1, visual1)
@@ -54,5 +54,5 @@ BEGIN mainLoop (visual1, visual2, board1, board2, isEnd, B1, B2)
 		ELSE
 			isEnd <- true
 		END_IF
-	WHILE (isEnd==false)
+	WHILE (isEnd = false)
 END mainLoop
