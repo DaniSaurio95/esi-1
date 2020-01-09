@@ -391,7 +391,7 @@ final public static Scanner sc = new Scanner(System.in);
 	public static void checkPhrase(int[][]board,int[][]visual, int a, int b) {
 
 		if(board[a][b]==1) {
-			System.out.println("Drown");
+			System.out.println("Sunk");
 		}
 		if (board[a][b]==2) {
 			System.out.println("Hit");		
