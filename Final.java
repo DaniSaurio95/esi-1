@@ -480,24 +480,24 @@ final public static Scanner sc = new Scanner(System.in);
 	public static boolean isTheEnd (int[][]visual, int player, int B1, int B2) {
 		boolean isEnd=false;
 		int alive=B1+(2*B2);
-		int dead=deadBoats(visual);
-		if(alive==dead) {
+		int sunk=sunkBoats(visual);
+		if(alive==sunk) {
 			isEnd=true;
 			System.out.println("Player " + player+ " wins");
 		}
 		return isEnd;
 	}
 
-	public static int deadBoats(int[][]visual) {
-		int dead =0;
+	public static int sunkBoats(int[][]visual) {
+		int sunk =0;
 		for(int i=0; i<visual.length; i++) {
 			for(int j=0; j<visual[0].length; j++) {
 				if (visual[i][j]==7) {
-					dead++;
+					sunk++;
 				}
 			}
 		}
 		
-		return dead;
+		return sunk;
 	}
 }
