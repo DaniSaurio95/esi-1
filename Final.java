@@ -135,7 +135,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			if(a==lastRow && b==0) {
@@ -144,7 +144,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -154,7 +154,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -164,7 +164,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -174,7 +174,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -184,7 +184,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -194,7 +194,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -204,7 +204,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -214,7 +214,7 @@ final public static Scanner sc = new Scanner(System.in);
 					i--;
 				else {
 					printBoard(array);
-					array=askForOtherPart(array, a, b, i);
+					array=askForOtherPart(array, a, b);
 				}
 			}
 			
@@ -226,18 +226,138 @@ final public static Scanner sc = new Scanner(System.in);
 		return array;
 	}
 	
-	private static int[][] askForOtherPart(int[][] array, int a, int b, int i) {
+	private static int[][] askForOtherPart(int[][] array, int a, int b) {
 		int row2,col2;
-		a=a+1;
-		b=b+1;
+		boolean cantPutHere=false;
+		a++;
+		b++;
 		do {
-			System.out.println("Introduce the row of the other part of the boat");
-			row2=sc.nextInt();
-			System.out.println("Introduce the column of the other part of the boat");
-			col2=sc.nextInt();
-		}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) && (row2==a && col2==b));
-		array[row2-1][col2-1]=2;
+			do {
+				System.out.println("Introduce the row of the other part of the boat");
+				row2=sc.nextInt();
+				System.out.println("Introduce the column of the other part of the boat");
+				col2=sc.nextInt();
+			}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) && (row2==a && col2==b));
+		cantPutHere=canPutOtherPart(array,row2,col2,a,b,cantPutHere);
+		}while(cantPutHere==true);
+		array[row2][col2]=2;
 		return array;
+	}
+	
+	private static boolean canPutOtherPart (int[][] array, int row2, int col2, int a, int b, boolean cantPutHere) {
+		row2--;
+		col2--;
+		a--;
+		b--;
+		if (row2==a-1) {
+			cantPutHere=otherPartAtTop(row2,col2,cantPutHere,array);
+		}
+		if (row2==a+1) {
+			cantPutHere=otherPartAtBottom(row2,col2,cantPutHere,array);
+		}
+		if (col2==b-1) {
+			cantPutHere=otherPartAtLeft(row2,col2,cantPutHere,array);
+		}
+		if (col2==b+1) {
+			cantPutHere=otherPartAtRight(row2,col2,cantPutHere,array);
+		}
+		return cantPutHere;
+	}
+	
+	private static boolean otherPartAtTop(int row2, int col2, boolean cantPutHere, int[][] array) {
+		if (row2==0) {
+			cantPutHere=false;
+		}
+		else {
+			if (col2==0) {
+				if (array[row2-1][col2]==1||array[row2-1][col2]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2) {
+					cantPutHere=true;
+				}
+			}
+			if (col2==array[0].length) {
+				if (array[row2-1][col2]==1||array[row2-1][col2]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+			else {
+				if (array[row2-1][col2]==1||array[row2-1][col2]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+		}
+		return cantPutHere;
+	}
+	
+	private static boolean otherPartAtBottom(int row2, int col2, boolean cantPutHere, int[][] array) {
+		if (row2==array.length) {
+			cantPutHere=false;
+		}
+		else {
+			if (col2==0) {
+				if (array[row2+1][col2]==1||array[row2+1][col2]==2||array[row2+1][col2+1]==1||array[row2+1][col2+1]==2) {
+					cantPutHere=true;
+				}
+			}
+			if (col2==array[0].length) {
+				if (array[row2+1][col2]==1||array[row2+1][col2]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+			else {
+				if (array[row2+1][col2]==1||array[row2+1][col2]==2||array[row2+1][col2+1]==1||array[row2+1][col2+1]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+		}
+		return cantPutHere;
+	}
+	
+	private static boolean otherPartAtLeft(int row2, int col2, boolean cantPutHere, int[][] array) {
+		if (col2==0) {
+			cantPutHere=false;
+		}
+		else {
+			if (row2==0) {
+				if (array[row2][col2-1]==1||array[row2][col2-1]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+			if (row2==array.length) {
+				if (array[row2][col2-1]==1||array[row2][col2-1]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+			else {
+				if (array[row2][col2-1]==1||array[row2][col2-1]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
+					cantPutHere=true;
+				}
+			}
+		}
+		return cantPutHere;
+	}
+	
+	private static boolean otherPartAtRight(int row2, int col2, boolean cantPutHere, int[][] array) {
+		if (col2==array[0].length) {
+			cantPutHere=false;
+		}
+		else {
+			if (row2==0) {
+				if (array[row2][col2+1]==1||array[row2][col2+1]==2||array[row2+1][col2+1]==1||array[row2+1][col2+1]==2) {
+					cantPutHere=true;
+				}
+			}
+			if (row2==array.length) {
+				if (array[row2][col2+1]==1||array[row2][col2+1]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2) {
+					cantPutHere=true;
+				}
+			}
+			else {
+				if (array[row2][col2+1]==1||array[row2][col2+1]==2||array[row2+1][col2+1]==1||array[row2+1][col2+1]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2) {
+					cantPutHere=true;
+				}
+			}
+		}
+		return cantPutHere;
 	}
 
 	private static int[][] checkInside(int[][] array, int a, int b, int i, int typeOfBoat) {
