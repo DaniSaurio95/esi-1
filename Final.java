@@ -215,7 +215,7 @@ final public static Scanner sc = new Scanner(System.in);
 			row2=sc.nextInt();
 			System.out.println("Introduce the column of the other part of the boat");
 			col2=sc.nextInt();
-		}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)));
+		}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) && (row2==a && col2==b));
 		array[row2-1][col2-1]=2;
 		return array;
 	}
