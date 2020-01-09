@@ -1,0 +1,18 @@
+BEGIN main
+	row <- askDimension("rows"):integer
+	col <- askDimension("columns"):integer
+	end <- false:boolean
+	B1 <- askBoats("1")
+	B2 <- askBoats("2")
+
+	WRITE ("Player 1")
+	board1[][] <- generateBoard(row,col,B1,B2):integer
+
+	WRITE ("Player 2")
+	int board2[][] <- generateBoard(row,col,B1,B2):integer
+
+	int visual1[][] <- generateVisual(length(board1),length(board2))
+	int visual2[][] <- generateVisual(length(board1),length(board2))
+	
+	mainloop(visual1, visual2, baord1, board2, end, B1, B2)
+END main
