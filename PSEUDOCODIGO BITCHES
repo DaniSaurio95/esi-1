@@ -79,6 +79,7 @@ return visual
 END_Attack
 
 CheckPhrase(board, visual, a, b)
+BEGIN_CheckPhrase
 
 IF(board[a][b]=1) THEN WRITE("Sunk")
 END_IF
@@ -92,6 +93,7 @@ END_IF
 END_CheckPhrase
 
 askCoor(board, message)
+BEGIN_AskCoor
 coor
 DO 
 WRITE("Introduce the" + message + "coordenates")
@@ -102,6 +104,7 @@ return coor
 END_AskCoor
 
 killTwo(visual, a, b)
+BEGIN_KillTwo
 IF(a!=0) THEN visual<- killTwoUp(visual,a,b)
 END_IF
 IF(a!=length(visual)-1) THEN visual<-killTwoDown(visual, a, b)
@@ -114,6 +117,7 @@ return visual
 END_KillTwo
 
 killTwoUp(visual, a, b)
+BEGIN KillTwoUp
 IF(visual[a-1][b]=6) THEN visual<-[a-1][b]<-7
 visual[a][b]<-7
 WRITE("and sunk")
@@ -123,6 +127,7 @@ return visual
 END KillTwoUp
 
 killTwoDown(visual, a, b)
+BEGIN_KillTwoDown
 IF(visual[a+1][b]=6) THEN visual[a+1][b]<-7
 visual[a][b]<-7
 WRITE("and sunk")
@@ -132,6 +137,7 @@ return visual
 END_KillTwoDown
 
 killTwoLeft(visual, a, b)
+BEGIN_KillTwoLeft
 IF(visual[a][b-1]=6) THEN visual[a][b-1]<-7
 visual[a][b]<-7
 WRITE("and sunk")
@@ -141,6 +147,7 @@ return visual
 END_KillTwoLeft
 
 killTwoRight(visual, a, b)
+BEGIN_KillTwoRight
 IF(visual[a][b+1]=6) THEN visual[a][b+1]<-7
 visual[a][b]=7
 WRITE("and sunk")
