@@ -352,13 +352,13 @@ final public static Scanner sc = new Scanner(System.in);
 		for(int i=0; i<visual.length; i++) {
 			for (int j=0; j<visual[i].length; j++) {
 				if(visual[i][j]==5) {
-					System.out.print("~");		
+					System.out.print("~ ");		
 				}else if(visual[i][j]==6) {
-					System.out.print("#");
+					System.out.print("# ");
 				}else if (visual[i][j]==7) {
-					System.out.print("X");
+					System.out.print("X ");
 				}else if (visual[i][j]==8) {
-					System.out.print("O");
+					System.out.print("O ");
 				}
 			}
 			System.out.println();
