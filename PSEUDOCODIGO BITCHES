@@ -56,3 +56,95 @@ BEGIN mainLoop (visual1, visual2, board1, board2, isEnd, B1, B2)
 		END_IF
 	WHILE (isEnd = false)
 END mainLoop
+
+attack(board, visual)
+Write (""Select the coordenates for your attack")
+coorx <- askCoor(board,"X")-1
+coorY <- askCoor(board,"Y")-1
+IF(coorX>length(board)-2 or coorY>length(board[0])-2 or coorX<0 or coorY<0) THEN Write ("Those coordenatea re out of the map")
+END_IF
+
+checkPhrase(board,visual,coorY,coorX)
+
+IF (board[coorY][coorX]=1) THEN visual[coorY][coorX]<-7
+END IF 
+IF (board[coorY][coorX]=2) THEN
+visual[coorY][coorX]<-6
+visual<-killTwo(visual,coorY,coorX)
+END IF 
+IF (board[coorY][coorX]=0) THEN visual[coorY][coorX]<-8
+END IF 
+
+return visual
+END_Attack
+
+CheckPhrase(board, visual, a, b)
+
+IF(board[a][b]=1) THEN WRITE("Sunk")
+END_IF
+
+IF(board[a][b]=2) THEN WRITE("Hit")
+END_IF
+
+IF(board[a][b]=0) THEN WRITE("You missed")
+END_IF
+
+END_CheckPhrase
+
+askCoor(board, message)
+coor
+DO 
+WRITE("Introduce the" + message + "coordenates")
+coor<- read
+WHILE (coor>length(board) or coor<0)
+return coor
+
+END_AskCoor
+
+killTwo(visual, a, b)
+IF(a!=0) THEN visual<- killTwoUp(visual,a,b)
+END_IF
+IF(a!=length(visual)-1) THEN visual<-killTwoDown(visual, a, b)
+END_IF
+IF(b!=0) THEN visual<-killTwoLeft(visual, a, b)
+END_IF
+IF(b!=length(visual[a])-1) THEN visual<-killTwoRight(visual, a, b)
+return visual 
+
+END_KillTwo
+
+killTwoUp(visual, a, b)
+IF(visual[a-1][b]=6) THEN visual<-[a-1][b]<-7
+visual[a][b]<-7
+WRITE("and sunk")
+END_IF
+return visual
+
+END KillTwoUp
+
+killTwoDown(visual, a, b)
+IF(visual[a+1][b]=6) THEN visual[a+1][b]<-7
+visual[a][b]<-7
+WRITE("and sunk")
+END_IF
+return visual
+
+END_KillTwoDown
+
+killTwoLeft(visual, a, b)
+IF(visual[a][b-1]=6) THEN visual[a][b-1]<-7
+visual[a][b]<-7
+WRITE("and sunk")
+END_IF
+return visual
+
+END_KillTwoLeft
+
+killTwoRight(visual, a, b)
+IF(visual[a][b+1]=6) THEN visual[a][b+1]<-7
+visual[a][b]=7
+WRITE("and sunk")
+END_IF 
+return visual
+
+END_KillTwoRight
