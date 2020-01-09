@@ -1,3 +1,4 @@
+Hola soy Alvaro puedo editar
 BEGIN main
 	row <- askDimension("rows"):integer
 	col <- askDimension("columns"):integer
