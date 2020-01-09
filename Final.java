@@ -1,41 +1,25 @@
-package Work;
+package FInal;
 import java.util.Scanner;
 
-public class Final {
+public class mods {
 final public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		int row,col,B1,B2;	//We declare the main variables to run the game
-		boolean end = false;	//This boolean variable will determine when the game is over
-		row = askDimension("rows");	//We ask the user for the rows and columns of the game table
+		int row,col,B1,B2;
+		boolean end = false;
+		row = askDimension("rows");
 		col = askDimension("columns");
-		B1 = askBoats("1");	//We as the user for the number of boats of size 1 and size 2 
+		B1 = askBoats("1");
 		B2 = askBoats("2");
-		System.out.println("Player 1");		//The game starts asking both players where they want their boats placed
+		System.out.println("Player 1");
 		int board1[][]= generateBoard(row,col,B1,B2);
 		System.out.println("Player 2");
 		int board2[][]= generateBoard(row,col,B1,B2);
 		
-		int visual1[][]=generateVisual(board1.length, board1[0].length);	//Now we generate the boards that both players 
-		int visual2[][]=generateVisual(board2.length, board2[0].length);	//will see in order to play.
+		int visual1[][]=generateVisual(board1.length, board1[0].length);
+		int visual2[][]=generateVisual(board2.length, board2[0].length);
 
-		do {
-			System.out.println("Turn for player 1, this is what you see");
-			printVisual(visual2);
-			visual2=attack(board2, visual2);
-			printVisual(visual2);
-			end =isTheEnd(visual2,1,B1,B2);
-			
-			if(end==false) {
-			System.out.println("Turn for player 2, this is what you see");
-			printVisual(visual1);
-			visual1=attack(board1,visual1);
-			printVisual(visual1);
-			end = isTheEnd(visual1,2,B1,B2);
-			}else {
-				end=true;
-			}
-		}while(end==false);
+		mainLoop(visual1, visual2, board1, board2, end, B1, B2);
 	}
 
 	public static int askDimension(String message) {
@@ -495,5 +479,25 @@ final public static Scanner sc = new Scanner(System.in);
 		}
 		
 		return dead;
+	}
+	
+	public static void mainLoop(int[][]visual1, int[][] visual2, int[][]board1, int[][] board2, boolean end, int B1, int B2) {
+		do {
+			System.out.println("Turn for player 1, this is what you see");
+			printVisual(visual2);
+			visual2=attack(board2, visual2);
+			printVisual(visual2);
+			end =isTheEnd(visual2,1,B1,B2);
+			
+			if(end==false) {
+			System.out.println("Turn for player 2, this is what you see");
+			printVisual(visual1);
+			visual1=attack(board1,visual1);
+			printVisual(visual1);
+			end = isTheEnd(visual1,2,B1,B2);
+			}else {
+				end=true;
+			}
+		}while(end==false);
 	}
 }
