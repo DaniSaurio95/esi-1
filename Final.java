@@ -1,7 +1,7 @@
-package FInal;
+package theoreticalWork;
 import java.util.Scanner;
 
-public class mods {
+public class BoatsGame {
 final public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
