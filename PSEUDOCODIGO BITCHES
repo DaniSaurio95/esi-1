@@ -37,26 +37,6 @@ BEGIN askBoats(number)
 	RETURN boat
 END askBoats
 
-BEGIN mainLoop (visual1, visual2, board1, board2, isEnd, B1, B2)
-	DO
-		WRITE ("Turn for player 1, this is what you see")
-		printVisual(visual2)
-		visual2 <- attack(board2, visual2)
-		printVisual(visual2)
-		isEnd <- isTheEnd(visual2, 1, B1, B2)
-	
-		IF(isEnd = false) THEN
-			WRITE("Turn for player 2, this is what you see")
-			printVisual(visual1)
-			visual2 <- attack(board1, visual1)
-			printVisual(visual1)
-			isEnd <- isTheEnd(visual1, 2, B1, B2)
-		ELSE
-			isEnd <- true
-		END_IF
-	WHILE (isEnd = false)
-END mainLoop
-
 attack(board, visual)
 Write (""Select the coordenates for your attack")
 coorx <- askCoor(board,"X")-1
@@ -155,3 +135,47 @@ END_IF
 return visual
 
 END_KillTwoRight
+
+BEGIN mainLoop (visual1, visual2, board1, board2, isEnd, B1, B2)
+	DO
+		WRITE ("Turn for player 1, this is what you see")
+		printVisual(visual2)
+		visual2 <- attack(board2, visual2)
+		printVisual(visual2)
+		isEnd <- isTheEnd(visual2, 1, B1, B2)
+	
+		IF(isEnd = false) THEN
+			WRITE ("Turn for player 2, this is what you see")
+			printVisual(visual1)
+			visual2 <- attack(board1, visual1)
+			printVisual(visual1)
+			isEnd <- isTheEnd(visual1, 2, B1, B2)
+		ELSE
+			isEnd <- true
+		END_IF
+	WHILE (isEnd = false)
+END
+
+BEGIN isTheEnd (visual, player, B1, B2)
+	isEnd <- false
+	alive <- B1+(2*B2)
+	sunk <- sunkBoats(visual)
+
+	IF (alive = dead) THEN
+		isEnd <- true
+		WRITE("Player")+player+("wins")
+	END_IF
+	RETURN isEnd
+END isTheEnd
+
+BEGIN sunkBoats (visual)
+	sunk <- 0
+	FOR i <- 0 WHILE <length(visual) INCREA
+		FOR j <- 0 WHILE <length(visual(i)) INCREA
+			IF (visual[i][j] = 7) THEN
+				sunk <- sunk + 1
+			END_IF
+		END_FOR
+	END_FOR
+	RETURN FOR
+END sunkBoats
