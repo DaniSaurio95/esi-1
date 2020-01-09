@@ -18,3 +18,21 @@ BEGIN main
 	
 	mainloop(visual1, visual2, baord1, board2, end, B1, B2)
 END main
+
+
+BEGIN askDimension(message)
+	DO
+		WRITE ("Introduce the number of "+message+": ")
+		READ dimension
+	WHILE(dimension < 3)
+	RETURN dimension
+END askDimension
+
+
+BEGIN askBoats(number)
+	DO
+		WRITE ("Introduce the number of boats of length "+number+": ")
+		READ boat
+	WHILE(boat<0)
+	RETURN boat
+END askBoats
