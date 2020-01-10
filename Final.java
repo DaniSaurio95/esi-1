@@ -494,13 +494,13 @@ final public static Scanner sc = new Scanner(System.in);
 	}
 
 	public static int[][]attack(int[][]board,int[][]visual){
-		System.out.println("Select the coordenates for your attack");
+		System.out.println("Select the coordinates for your attack");
 		int coorX;
 		int coorY;
-		coorX = askCoor(board,"X")-1;
-		coorY = askCoor(board,"Y")-1;
-		if(coorX>board.length-2 || coorY>board[0].length-2 || coorX<0 || coorY<0) {
-			System.out.println("Those coordenates are out of the map");
+		coorX = askCoor(board,"column")-1;
+		coorY = askCoor(board,"row")-1;
+		if(coorX>board.length-1 || coorY>board[0].length-1 || coorX<0 || coorY<0) {
+			System.out.println("Those coordinates are out of the map");
 		}
 		checkPhrase(board,visual,coorY,coorX);	
 			
@@ -534,7 +534,7 @@ final public static Scanner sc = new Scanner(System.in);
 	public static int askCoor(int[][]board,String message) {
 		int coor;
 		do{
-			System.out.println("Introduce the "+message+" coordenate: ");
+			System.out.println("Introduce the "+message+" coordinate: ");
 			coor = sc.nextInt();
 		}while(coor>board.length || coor<0);
 		return coor;
