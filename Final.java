@@ -2,24 +2,24 @@ package theoreticalWork;
 import java.util.Scanner;
 
 public class BoatsGame {
-final public static Scanner sc = new Scanner(System.in);
+final public static Scanner sc = new Scanner(System.in); //We declare the scanner
 	
 	public static void main(String[] args) {
 		int row,col,B1,B2;
 		boolean isEnd = false;
-		row = askDimension("rows");
-		col = askDimension("columns");
-		B1 = askBoats("1");
-		B2 = askBoats("2");
+		row = askDimension("rows");    //We ask for the rows of the board
+		col = askDimension("columns"); //We ask for the columns of the board
+		B1 = askBoats("1");	       //We ask for the number of boats of length 1
+		B2 = askBoats("2");	       //We ask for the number of boats of length 1
 		System.out.println("Player 1");
-		int board1[][]= generateBoard(row,col,B1,B2);
+		int board1[][]= generateBoard(row,col,B1,B2); //We generate the board of boats for player 1 
 		System.out.println("Player 2");
-		int board2[][]= generateBoard(row,col,B1,B2);
+		int board2[][]= generateBoard(row,col,B1,B2); //We generate the board of boats for player 1 
 		
-		int visual1[][]=generateVisual(board1.length, board1[0].length);
-		int visual2[][]=generateVisual(board2.length, board2[0].length);
+		int visual1[][]=generateVisual(board1.length, board1[0].length); //We generate the board of attacks for player 1 
+		int visual2[][]=generateVisual(board2.length, board2[0].length); //We generate the board of attacks for player 2 
 
-		mainLoop(visual1, visual2, board1, board2, isEnd, B1, B2);
+		mainLoop(visual1, visual2, board1, board2, isEnd, B1, B2); //We execute the game
 	}
 
 	public static void mainLoop(int[][]visual1, int[][] visual2, int[][]board1, int[][] board2, boolean isEnd, int B1, int B2) {
