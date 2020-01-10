@@ -114,14 +114,12 @@ BEGIN askForOtherPart(array, a ,b)
 			WRITE ("Introduce the column for the other part of the boat")
 			READ col2
 		WHILE ((col2<>b OR (row<>a+1 AND row2<>a-1)) AND (row2<>a OR (col2<>b+1 AND col2<>b-1)) AND (row2=a AND col2=b))
-	row2 <- row2-1
-	col2 <- col2-1
 	cantPutHere <- canPutOtherPart(array,row2,col2,a,b,cantPutHere)
 	IF(cantPutHere = true)
 		WRITE ("You can't put it here")
 	END_IF
 	WHILE (cantPutHere = true)
-	array[row2][col2]=2
+	array[row2-1][col2-1]=2
 	return array
 END askForOtherPart
 
@@ -129,6 +127,8 @@ END askForOtherPart
 BEGIN canPutOtherPart(array,row2,col2,a,b,cantPutHere)
 	a <- a-1
 	b <- b-1
+	row2 <- row2-1
+	col2 <- col2-1
 	IF (row2=a-1)
 		cantPutHere <- otherPartAtTop(row2,col2,cantPutHere,array)
 	END_IF
