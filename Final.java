@@ -238,20 +238,20 @@ final public static Scanner sc = new Scanner(System.in);
 				System.out.println("Introduce the column of the other part of the boat");
 				col2=sc.nextInt();
 			}while((col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) && (row2==a && col2==b));
-		row2--;
-		col2--;
 		cantPutHere=canPutOtherPart(array,row2,col2,a,b,cantPutHere);
 		if (cantPutHere) {
 			System.out.println("You can't put it here");
 		}
 		}while(cantPutHere);
-		array[row2][col2]=2;
+		array[row2-1][col2-1]=2;
 		return array;
 	}
 	
 	private static boolean canPutOtherPart (int[][] array, int row2, int col2, int a, int b, boolean cantPutHere) {
 		a--;
 		b--;
+		row2--;
+		col2--;
 		if (row2==a-1) {
 			cantPutHere=otherPartAtTop(row2,col2,cantPutHere,array);
 		}
