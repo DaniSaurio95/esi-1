@@ -28,18 +28,18 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 			printVisual(visual2);
 			visual2=attack(board2, visual2);
 			printVisual(visual2);
-			isEnd =isTheEnd(visual2,1,B1,B2);
+			isEnd =isTheEnd(visual2,1,B1,B2); //We check if there is no more boats alive
 			
 			if(isEnd==false) {
 			System.out.println("Turn for player 2, this is what you see");
 			printVisual(visual1);
 			visual1=attack(board1,visual1);
 			printVisual(visual1);
-			isEnd = isTheEnd(visual1,2,B1,B2);
+			isEnd = isTheEnd(visual1,2,B1,B2); //We check if there is no more boats alive
 			}else {
 				isEnd=true;
 			}
-		}while(isEnd==false);
+		}while(isEnd==false); //The game will keep going until player 1 or player 2 wins
 	}
 	
 	public static int askDimension(String message) {
@@ -79,7 +79,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 				a = sc.nextInt();
 				System.out.println("Introduce the column you want your B1 boat to be: [1,"+ col+"]");
 				b = sc.nextInt();
-			}while(a<1 || a>row || b<1 || b>col);
+			}while(a<1 || a>row || b<1 || b>col); //We check that the coordenates are not out of the board
 			a=a-1;
 			b=b-1;
 			
@@ -113,8 +113,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 			if(array[a][b]==0)
 				i--;
 			
-			//We print the board
-			printBoard(array);
+			printBoard(array); //We print the board
 		}
 		return array;
 	}
@@ -126,7 +125,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 				a = sc.nextInt();
 				System.out.println("Introduce the column you want your B2 boat to be: [1,"+ col+"]");
 				b = sc.nextInt();
-			}while(a<1 || a>row || b<1 || b>col);
+			}while(a<1 || a>row || b<1 || b>col); //We check that the coordenates are not out of the board
 			a=a-1;
 			b=b-1;
 			if(a==0 && b==0) {
@@ -218,15 +217,12 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 				}
 			}
 			
-			//We print the board
-			printBoard(array);
-				
-
+			printBoard(array); //We print the board
 		}
 		return array;
 	}
 	
-	private static int[][] askForOtherPart(int[][] array, int a, int b) {
+	private static int[][] askForOtherPart(int[][] array, int a, int b) { //Here we ask for the contiguous part of the boats of length 2
 		int row2,col2;
 		boolean cantPutHere;
 		a++;
@@ -238,8 +234,8 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 				row2=sc.nextInt();
 				System.out.println("Introduce the column of the other part of the boat");
 				col2=sc.nextInt();
-			}while(( (col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) )|| (row2==a && col2==b));
-		cantPutHere=canPutOtherPart(array,row2,col2,a,b,cantPutHere);
+			}while(( (col2!=b || (row2!=a+1 && row2!=a-1)) && (row2!=a || (col2!=b+1 && col2!=b-1)) )|| (row2==a && col2==b)); //It will keep asking for the coordenates if we want to put the other part in a place that is not contiguous to the boat
+		cantPutHere=canPutOtherPart(array,row2,col2,a,b,cantPutHere); //We check that the other part of the boat can be put in the wished place
 		if (cantPutHere) {
 			System.out.println("You can't put it here");
 		}
@@ -454,7 +450,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		return array;
 	}
 
-	private static void printBoard(int[][] array) {
+	private static void printBoard(int[][] array) {  //This method prints an array when we need it
 		for(int i=0;i<array.length;i++) {
 			for(int j=0;j<array[i].length;j++) {
 				System.out.print(array[i][j]+" ");
@@ -464,7 +460,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 
 	}
 
-	public static int[][]generateVisual(int a, int b) {
+	public static int[][]generateVisual(int a, int b) {  //This method is used to fill the boards of the attacks
 		int visual[][]=new int[a][b];
 		for(int i=0; i<visual.length; i++) {
 			for (int j=0; j<visual[i].length; j++) {
@@ -476,7 +472,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		return visual;
 	}
 		
-	public static void printVisual(int[][]visual) {
+	public static void printVisual(int[][]visual) {  //This method prints the attack board more visually
 		for(int i=0; i<visual.length; i++) {
 			for (int j=0; j<visual[i].length; j++) {
 				if(visual[i][j]==5) {
@@ -493,16 +489,16 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		}
 	}
 
-	public static int[][]attack(int[][]board,int[][]visual){
+	public static int[][]attack(int[][]board,int[][]visual){ //This method makes the entire attack process
 		System.out.println("Select the coordinates for your attack");
 		int coorX;
 		int coorY;
 		coorX = askCoor(board,"column")-1;
 		coorY = askCoor(board,"row")-1;
 		if(coorX>board.length || coorY>board[0].length || coorX<0 || coorY<0) {
-			System.out.println("Those coordinates are out of the map");
+			System.out.println("Those coordinates are out of the map"); //We check that the coordenates are not out of the board
 		}
-		checkPhrase(board,visual,coorY,coorX);	
+		checkPhrase(board,visual,coorY,coorX);	//Here we display a message depending on the effect of the attack done
 			
 		if(board[coorY][coorX]==1) {
 			visual[coorY][coorX]=7;
@@ -516,7 +512,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		return visual;
 	}
 
-	public static void checkPhrase(int[][]board,int[][]visual, int a, int b) {
+	public static void checkPhrase(int[][]board,int[][]visual, int a, int b) { //This method displays a message depending on the state of the boats
 
 		if(board[a][b]==1) {
 			System.out.println("Sunk");
@@ -540,7 +536,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		return coor;
 	}
 
-	public static int[][]killTwo(int[][]visual, int a, int b){
+	public static int[][]killTwo(int[][]visual, int a, int b){ //This method check if a boat of length 2 is hit or sunk when an attack is performed
 		if(a!=0) {
 			visual=killTwoUp(visual, a, b);
 		}
@@ -592,7 +588,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		return visual;
 	}
 
-	public static boolean isTheEnd (int[][]visual, int player, int B1, int B2) {
+	public static boolean isTheEnd (int[][]visual, int player, int B1, int B2) { //This method checks if the number of boats at the begining of the game is the same as the number of sunk boats
 		boolean isEnd=false;
 		int alive=B1+(2*B2);
 		int sunk=sunkBoats(visual);
@@ -603,7 +599,7 @@ final public static Scanner sc = new Scanner(System.in); //We declare the scanne
 		return isEnd;
 	}
 
-	public static int sunkBoats(int[][]visual) {
+	public static int sunkBoats(int[][]visual) {  //This method counts the number of sunk boats in our board
 		int sunk =0;
 		for(int i=0; i<visual.length; i++) {
 			for(int j=0; j<visual[0].length; j++) {
