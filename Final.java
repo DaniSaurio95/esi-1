@@ -228,10 +228,11 @@ final public static Scanner sc = new Scanner(System.in);
 	
 	private static int[][] askForOtherPart(int[][] array, int a, int b) {
 		int row2,col2;
-		boolean cantPutHere=false;
+		boolean cantPutHere;
 		a++;
 		b++;
 		do {
+			cantPutHere=false;
 			do {
 				System.out.println("Introduce the row of the other part of the boat");
 				row2=sc.nextInt();
@@ -277,12 +278,12 @@ final public static Scanner sc = new Scanner(System.in);
 					cantPutHere=true;
 				}
 			}
-			if (col2==array[0].length) {
+			if (col2==array[0].length-1) {
 				if (array[row2-1][col2]==1||array[row2-1][col2]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
 					cantPutHere=true;
 				}
 			}
-			else {
+			if (col2!=0&&col2!=array[0].length-1) {
 				if (array[row2-1][col2]==1||array[row2-1][col2]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
 					cantPutHere=true;
 				}
@@ -301,12 +302,12 @@ final public static Scanner sc = new Scanner(System.in);
 					cantPutHere=true;
 				}
 			}
-			if (col2==array[0].length) {
+			if (col2==array[0].length-1) {
 				if (array[row2+1][col2]==1||array[row2+1][col2]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2) {
 					cantPutHere=true;
 				}
 			}
-			else {
+			if(col2!=0&&col2!=array[0].length-1) {
 				if (array[row2+1][col2]==1||array[row2+1][col2]==2||array[row2+1][col2+1]==1||array[row2+1][col2+1]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2) {
 					cantPutHere=true;
 				}
@@ -325,12 +326,12 @@ final public static Scanner sc = new Scanner(System.in);
 					cantPutHere=true;
 				}
 			}
-			if (row2==array.length) {
+			if (row2==array.length-1) {
 				if (array[row2][col2-1]==1||array[row2][col2-1]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
 					cantPutHere=true;
 				}
 			}
-			else {
+			if(row2!=0&&row2!=array.length-1) {
 				if (array[row2][col2-1]==1||array[row2][col2-1]==2||array[row2+1][col2-1]==1||array[row2+1][col2-1]==2||array[row2-1][col2-1]==1||array[row2-1][col2-1]==2) {
 					cantPutHere=true;
 				}
@@ -349,12 +350,12 @@ final public static Scanner sc = new Scanner(System.in);
 					cantPutHere=true;
 				}
 			}
-			if (row2==array.length) {
+			if (row2==array.length-1) {
 				if (array[row2][col2+1]==1||array[row2][col2+1]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2) {
 					cantPutHere=true;
 				}
 			}
-			else {
+			if(row2!=0&&row2!=array.length-1) {
 				if (array[row2][col2+1]==1||array[row2][col2+1]==2||array[row2+1][col2+1]==1||array[row2+1][col2+1]==2||array[row2-1][col2+1]==1||array[row2-1][col2+1]==2) {
 					cantPutHere=true;
 				}
