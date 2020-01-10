@@ -100,14 +100,14 @@ BEGIN generateB2(array, row, col, b1, b2, a, b, lastRow, lastCol, typeOfBoat)
 		askForOtherPart(array, a, b)
 	END_FOR
 	return array
-END generateB1
+END generateB2
 
 
 BEGIN askForOtherPart(array, a ,b)
 	a <- a+1
 	b <- b+1
-	cantPutHere <- false
 	DO
+	cantPutHere <- false
 		DO
 			WRITE ("Introduce the row of the other part of the boat")
 			READ row2
