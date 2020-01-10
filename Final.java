@@ -293,7 +293,7 @@ final public static Scanner sc = new Scanner(System.in);
 	}
 	
 	private static boolean otherPartAtBottom(int row2, int col2, boolean cantPutHere, int[][] array) {
-		if (row2==array.length) {
+		if (row2==array.length-1) {
 			cantPutHere=false;
 		}
 		else {
@@ -341,7 +341,7 @@ final public static Scanner sc = new Scanner(System.in);
 	}
 	
 	private static boolean otherPartAtRight(int row2, int col2, boolean cantPutHere, int[][] array) {
-		if (col2==array[0].length) {
+		if (col2==array[0].length-1) {
 			cantPutHere=false;
 		}
 		else {
