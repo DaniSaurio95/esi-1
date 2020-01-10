@@ -499,7 +499,7 @@ final public static Scanner sc = new Scanner(System.in);
 		int coorY;
 		coorX = askCoor(board,"column")-1;
 		coorY = askCoor(board,"row")-1;
-		if(coorX>board.length-1 || coorY>board[0].length-1 || coorX<0 || coorY<0) {
+		if(coorX>board.length || coorY>board[0].length || coorX<0 || coorY<0) {
 			System.out.println("Those coordinates are out of the map");
 		}
 		checkPhrase(board,visual,coorY,coorX);	
