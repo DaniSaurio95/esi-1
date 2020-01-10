@@ -104,15 +104,78 @@ END generateB1
 
 
 BEGIN askForOtherPart(array, a ,b)
+	a <- a+1
+	b <- b+1
+	cantPutHere <- false
 	DO
-		WRITE ("Introduce the row of the other part of the boat")
-		READ row2
-		WRITE ("Introduce the column for the other part of the boat")
-		READ col2
-	WHILE ((col2<>b OR (row<>a+1 AND row2<>a-1)) AND (row2<>a OR (col2<>b+1 AND col2<>b-1)) AND (row2=a AND col2=b))
+		DO
+			WRITE ("Introduce the row of the other part of the boat")
+			READ row2
+			WRITE ("Introduce the column for the other part of the boat")
+			READ col2
+		WHILE ((col2<>b OR (row<>a+1 AND row2<>a-1)) AND (row2<>a OR (col2<>b+1 AND col2<>b-1)) AND (row2=a AND col2=b))
+	row2 <- row2-1
+	col2 <- col2-1
+	cantPutHere <- canPutOtherPart(array,row2,col2,a,b,cantPutHere)
+	IF(cantPutHere = true)
+		WRITE ("You can't put it here")
+	END_IF
+	WHILE (cantPutHere = true)
 	array[row2][col2]=2
 	return array
 END askForOtherPart
+
+
+BEGIN canPutOtherPart(array,row2,col2,a,b,cantPutHere)
+	a <- a-1
+	b <- b-1
+	IF (row2=a-1)
+		cantPutHere <- otherPartAtTop(row2,col2,cantPutHere,array)
+	END_IF
+	IF (row2=a+1)
+		cantPutHere <- otherPartAtBottom(row2,col2,cantPutHere,array)
+	END_IF
+	IF (col2=b-1)
+		cantPutHere <- otherPartAtLeft(row2,col2,cantPutHere,array)
+	END_IF
+	IF (col2=b+1)
+		cantPutHere <- otherPartAtRight(row2,col2,cantPutHere,array)
+	END_IF
+	return cantPutHere
+END canPutOtherPart
+
+
+BEGIN otherPartAtTop(row2,col2,cantPutHere,array)
+	IF (array[row2-1][col2]=1 OR array[row2-1][col2]=2 OR array[row2-1][col2+1]=1 OR array[row2-1][col2+1]=2 OR array[row2-1][col2-1]=1 OR array[row2-1][col2-1]=2)
+		cantPutHere <- true
+	END_IF
+	return cantPutHere
+END otherPartAtTop
+	
+
+BEGIN otherPartAtBottom(row2,col2,cantPutHere,array)
+	IF (array[row2+1][col2]=1 OR array[row2+1][col2]=2 OR array[row2+1][col2+1]=1 OR array[row2+1][col2+1]=2 OR array[row2+1][col2-1]=1 OR array[row2+1][col2-1]=2)
+		cantPutHere <- true
+	END_IF
+	return cantPutHere
+END otherPartAtBottom
+	
+
+BEGIN otherPartAtLeft(row2,col2,cantPutHere,array)
+	IF (array[row2][col2-1]=1 OR array[row2][col2-1]=2 OR array[row2+1][col2-1]=1 OR array[row2+1][col2-1]=2 OR array[row2-1][col2-1]=1 OR array[row2-1][col2-1]=2)
+		cantPutHere <- true
+	END_IF
+	return cantPutHere
+END otherPartAtLeft
+	
+
+BEGIN otherPartAtRight(row2,col2,cantPutHere,array)
+	IF (array[row2][col2+1]=1 OR array[row2][col2+1]=2 OR array[row2+1][col2+1]=1 OR array[row2+1][col2+1]=2 OR array[row2-1][col2+1]=1 OR array[row2-1][col2+1]=2) {
+		cantPutHere <- true
+	END_IF
+	return cantPutHere
+END otherPartAtRight
+
 
 attack(board, visual)
 Write (""Select the coordenates for your attack")
